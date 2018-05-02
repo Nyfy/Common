@@ -7,69 +7,72 @@ import java.util.Map;
 
 public class Fields {
     public static String DISPLAY = "Display";
+    public static String TELEVISION = "Television";
+    public static String MONITOR = "Monitor";
 
     public static String BRAND = "Brand";
-    public HashMap<String, String[]> BRAND_VALUES;
+    private HashMap<String, String[]> BRAND_VALUES;
     public static String SCREEN_SIZE = "ScreenSize";
-    public HashMap<String,String[]> SCREEN_SIZE_VALUES;
+    private HashMap<String,String[]> SCREEN_SIZE_VALUES;
     public static String RESOLUTION = "Resolution";
-    public HashMap<String,String[]> RESOLUTION_VALUES;
+    private HashMap<String,String[]> RESOLUTION_VALUES;
     public static String RESPONSE_TIME = "ResponseTime";
-    public HashMap<String,String[]> RESPONSE_TIME_VALUES;
+    private HashMap<String,String[]> RESPONSE_TIME_VALUES;
     public static String REFRESH_RATE = "RefreshRate";
-    public HashMap<String,String[]> REFRESH_RATE_VALUES;
+    private HashMap<String,String[]> REFRESH_RATE_VALUES;
     public static String PANEL_TYPE = "PanelType";
-    public HashMap<String,String[]> PANEL_TYPE_VALUES;
+    private HashMap<String,String[]> PANEL_TYPE_VALUES;
     public static String ADAPTIVE_SYNC = "AdaptiveSync";
-    public HashMap<String,String[]> ADAPTIVE_SYNC_VALUES;
+    private HashMap<String,String[]> ADAPTIVE_SYNC_VALUES;
     public static String VGA = "VGA";
-    public HashMap<String,String[]> VGA_VALUES;
+    private HashMap<String,String[]> VGA_VALUES;
     public static String DVI = "DVI";
-    public HashMap<String,String[]> DVI_VALUES;
+    private HashMap<String,String[]> DVI_VALUES;
     public static String HDMI = "HDMI";
-    public HashMap<String,String[]> HDMI_VALUES;
+    private HashMap<String,String[]> HDMI_VALUES;
     public static String DISPLAY_PORT = "DisplayPort";
-    public HashMap<String,String[]> DISPLAY_PORT_VALUES;
+    private HashMap<String,String[]> DISPLAY_PORT_VALUES;
     public static String VESA_MOUNT = "VesaMount";
-    public HashMap<String,String[]> VESA_MOUNT_VALUES;
+    private HashMap<String,String[]> VESA_MOUNT_VALUES;
     public static String ASPECT_RATIO = "AspectRatio";
-    public HashMap<String,String[]> ASPECT_RATIO_VALUES;
+    private HashMap<String,String[]> ASPECT_RATIO_VALUES;
     public static String PIXEL_PITCH = "PixelPitch";
-    public HashMap<String,String[]> PIXEL_PITCH_VALUES;
+    private HashMap<String,String[]> PIXEL_PITCH_VALUES;
     public static String PIXEL_DENSITY = "PixelDensity";
-    public HashMap<String,String[]> PIXEL_DENSITY_VALUES;
+    private HashMap<String,String[]> PIXEL_DENSITY_VALUES;
     public static String BRIGHTNESS = "Brightness";
-    public HashMap<String,String[]> BRIGHTNESS_VALUES;
+    private HashMap<String,String[]> BRIGHTNESS_VALUES;
     public static String REMOVABLE_STAND = "RemovableStand";
-    public HashMap<String, String[]> REMOVABLE_STAND_VALUES;
+    private HashMap<String, String[]> REMOVABLE_STAND_VALUES;
     public static String HEIGHT_ADJUSTMENT = "HeightAdjustment";
-    public HashMap<String, String[]> HEIGHT_ADJUSTMENT_VALUES;
-    public static String PORTRAIT_PIVOT = "PortraitPivot";
-    public HashMap<String, String[]> PORTRAIT_PIVOT_VALUES;
+    private HashMap<String, String[]> HEIGHT_ADJUSTMENT_VALUES;
+    public static String PIVOT_ADJUSTMENT = "PivotAdjustment";
+    private HashMap<String, String[]> PIVOT_ADJUSTMENT_VALUES;
     public static String SWIVEL_ADJUSTMENT = "SwivelAdjustment";
-    public HashMap<String, String[]> SWIVEL_ADJUSTMENT_VALUES;
+    private HashMap<String, String[]> SWIVEL_ADJUSTMENT_VALUES;
     public static String LEFT_SWIVEL = "LeftSwivel";
-    public HashMap<String, String[]> LEFT_SWIVEL_VALUES;
+    private HashMap<String, String[]> LEFT_SWIVEL_VALUES;
     public static String RIGHT_SWIVEL = "RightSwivel";
-    public HashMap<String, String[]> RIGHT_SWIVEL_VALUES;
+    private HashMap<String, String[]> RIGHT_SWIVEL_VALUES;
     public static String TILT_ADJUSTMENT = "TiltAdjustment";
-    public HashMap<String, String[]> TILT_ADJUSTMENT_VALUES;
+    private HashMap<String, String[]> TILT_ADJUSTMENT_VALUES;
     public static String FORWARD_TILT = "ForwardTilt";
-    public HashMap<String, String[]> FORWARD_TILT_VALUES;
+    private HashMap<String, String[]> FORWARD_TILT_VALUES;
     public static String BACKWARD_TILT = "BackwardTilt";
-    public HashMap<String, String[]> BACKWARD_TILT_VALUES;
+    private HashMap<String, String[]> BACKWARD_TILT_VALUES;
     public static String CURVATURE = "Curvature";
-    public HashMap<String, String[]> CURVATURE_VALUES;
+    private HashMap<String, String[]> CURVATURE_VALUES;
     public static String DISPLAY_AREA = "DisplayArea";
-    public HashMap<String, String[]> DISPLAY_AREA_VALUES;
+    private HashMap<String, String[]> DISPLAY_AREA_VALUES;
     public static String STATIC_CONTRAST = "ContrastRatio";
-    public HashMap<String, String[]> STATIC_CONTRAST_VALUES;
+    private HashMap<String, String[]> STATIC_CONTRAST_VALUES;
     public static String DYNAMIC_CONTRAST = "ContrastRatio";
-    public HashMap<String, String[]> DYNAMIC_CONTRAST_VALUES;
+    private HashMap<String, String[]> DYNAMIC_CONTRAST_VALUES;
     
-    public List<String> CONNECTOR_FIELDS;
-    public List<String> ERGONOMIC_FIELDS;
-    public Map<String,List<String>> CATEGORIZED_FIELDS;
+    private List<String> CONNECTOR_FIELDS;
+    private List<String> ERGONOMIC_FIELDS;
+    private Map<String, String> ERGONOMIC_ADJUSTMENTS;
+    private Map<String,List<String>> CATEGORIZED_FIELDS;
     
     public static String CATEGORY = "Category";
     public static String FOUNDTIME = "FoundTime";
@@ -80,19 +83,38 @@ public class Fields {
     public static String ERGONOMICS = "Ergonomics";
     public static String CONTRAST = "Contrast";
     
-    public static String DUPLICATE = "dup";
     public static String FIND_TAG = "FIND_MATCH";
     
-    public static Map<String, HashMap<String, String[]>> FIELD_VALUES;
+    private static Map<String, HashMap<String, String[]>> FIELD_VALUES;
     
     public Fields() {
         FIELD_VALUES = new HashMap<String,HashMap<String,String[]>>();
         defineValueMaps();
         defineCategorizedFields();
+        defineErgonomicAdjustments();
     }
     
     public Map<String, HashMap<String, String[]>> getFieldValues() {
         return FIELD_VALUES;
+    }
+    
+    public Map<String,List<String>> getCategorizedFields() {
+        return CATEGORIZED_FIELDS;
+    }
+    
+    public Map<String, String> getErgonomicAdjustments() {
+        return ERGONOMIC_ADJUSTMENTS;
+    }
+    
+    private void defineErgonomicAdjustments() {
+        Map<String, String> ergonomicAdjustments = new HashMap<String, String>();
+        
+        ergonomicAdjustments.put("tilt", TILT_ADJUSTMENT);
+        ergonomicAdjustments.put("height", HEIGHT_ADJUSTMENT);
+        ergonomicAdjustments.put("pivot", PIVOT_ADJUSTMENT);
+        ergonomicAdjustments.put("swivel", SWIVEL_ADJUSTMENT);
+        
+        ERGONOMIC_ADJUSTMENTS = ergonomicAdjustments;
     }
     
     private void defineCategorizedFields() {
@@ -106,7 +128,7 @@ public class Fields {
         ERGONOMIC_FIELDS.add(VESA_MOUNT);
         ERGONOMIC_FIELDS.add(REMOVABLE_STAND);
         ERGONOMIC_FIELDS.add(HEIGHT_ADJUSTMENT);
-        ERGONOMIC_FIELDS.add(PORTRAIT_PIVOT);
+        ERGONOMIC_FIELDS.add(PIVOT_ADJUSTMENT);
         ERGONOMIC_FIELDS.add(SWIVEL_ADJUSTMENT);
         ERGONOMIC_FIELDS.add(TILT_ADJUSTMENT);
         ERGONOMIC_FIELDS.add(FORWARD_TILT);
@@ -305,10 +327,10 @@ public class Fields {
         HEIGHT_ADJUSTMENT_VALUES.put("false", new String[] {"no","false"});
         FIELD_VALUES.put(HEIGHT_ADJUSTMENT, HEIGHT_ADJUSTMENT_VALUES);
         
-        PORTRAIT_PIVOT_VALUES = new HashMap<String,String[]>();
-        PORTRAIT_PIVOT_VALUES.put("true", new String[] {"yes","true"});
-        PORTRAIT_PIVOT_VALUES.put("false", new String[] {"no","false"});
-        FIELD_VALUES.put(PORTRAIT_PIVOT, PORTRAIT_PIVOT_VALUES);
+        PIVOT_ADJUSTMENT_VALUES = new HashMap<String,String[]>();
+        PIVOT_ADJUSTMENT_VALUES.put("true", new String[] {"yes","true"});
+        PIVOT_ADJUSTMENT_VALUES.put("false", new String[] {"no","false"});
+        FIELD_VALUES.put(PIVOT_ADJUSTMENT, PIVOT_ADJUSTMENT_VALUES);
         
         SWIVEL_ADJUSTMENT_VALUES = new HashMap<String,String[]>();
         SWIVEL_ADJUSTMENT_VALUES.put("true", new String[] {"yes","true"});
