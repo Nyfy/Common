@@ -72,6 +72,7 @@ public class Fields {
     private List<String> CONNECTOR_FIELDS;
     private List<String> ERGONOMIC_FIELDS;
     private Map<String, String> ERGONOMIC_ADJUSTMENTS;
+    private Map<String, String> CONNECTOR_TYPES;
     private Map<String,List<String>> CATEGORIZED_FIELDS;
     
     public static String CATEGORY = "Category";
@@ -92,6 +93,7 @@ public class Fields {
         defineValueMaps();
         defineCategorizedFields();
         defineErgonomicAdjustments();
+        defineConnectorTypes();
     }
     
     public Map<String, HashMap<String, String[]>> getFieldValues() {
@@ -106,15 +108,27 @@ public class Fields {
         return ERGONOMIC_ADJUSTMENTS;
     }
     
+    public Map<String, String> getConnectorTypes() {
+        return CONNECTOR_TYPES;
+    }
+    
     private void defineErgonomicAdjustments() {
-        Map<String, String> ergonomicAdjustments = new HashMap<String, String>();
+        ERGONOMIC_ADJUSTMENTS = new HashMap<String, String>();
         
-        ergonomicAdjustments.put("tilt", TILT_ADJUSTMENT);
-        ergonomicAdjustments.put("height", HEIGHT_ADJUSTMENT);
-        ergonomicAdjustments.put("pivot", PIVOT_ADJUSTMENT);
-        ergonomicAdjustments.put("swivel", SWIVEL_ADJUSTMENT);
+        ERGONOMIC_ADJUSTMENTS.put("tilt", TILT_ADJUSTMENT);
+        ERGONOMIC_ADJUSTMENTS.put("height", HEIGHT_ADJUSTMENT);
+        ERGONOMIC_ADJUSTMENTS.put("pivot", PIVOT_ADJUSTMENT);
+        ERGONOMIC_ADJUSTMENTS.put("swivel", SWIVEL_ADJUSTMENT);
+    }
+    
+    private void defineConnectorTypes() {
+        CONNECTOR_TYPES = new HashMap<String, String>();
         
-        ERGONOMIC_ADJUSTMENTS = ergonomicAdjustments;
+        CONNECTOR_TYPES.put("vga", VGA);
+        CONNECTOR_TYPES.put("d.?sub", VGA);
+        CONNECTOR_TYPES.put("dvi", DVI);
+        CONNECTOR_TYPES.put("hdmi", HDMI);
+        CONNECTOR_TYPES.put("display.?port", DISPLAY_PORT);
     }
     
     private void defineCategorizedFields() {
